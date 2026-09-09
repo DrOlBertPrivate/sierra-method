@@ -7,7 +7,7 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
     uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
     extends <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders
 
-    @rdfs:label "Fire Fighter Needs"
+    @rdfs:label "Fire Fighter Needs2"
     instance FireFighterNeeds : stakeholder:Concern [
         base:description "Rapid situational awareness and robust field usability."
         stakeholder:isExpressedBy stakeholders:FireFighter
