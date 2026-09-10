@@ -1,3 +1,15 @@
 [mcp_servers.context7]
 command = "npx"
 args = ["-y", "@oml/mcp"]
+
+[mcp_servers.context7.tools.oml_workspace]
+approval_mode = "approve"
+
+[mcp_servers.context7.tools.oml_validate]
+approval_mode = "approve"
+
+[mcp_servers.context7.tools.oml_members]
+approval_mode = "approve"
+
+[mcp_servers.context7.tools.oml_manual]
+approval_mode = "approve"

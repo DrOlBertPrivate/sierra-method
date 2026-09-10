@@ -1,0 +1,124 @@
+@dc:title "ICAS V&V Platforms and Capabilities"
+@dc:description "A small ICAS capability planning demonstrator based on the supplied platform descriptions. The selected dimension combinations are illustrative, not an exhaustive or verified platform capability catalogue."
+description <https://fireforce6.github.io/icas-vv/capabilities#> as capabilities {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/icas-vv#> as icas-vv
+
+    @rdfs:label "ICAS V&V Capability Space"
+    instance ICASCapabilitySpace : icas-vv:VVCapabilitySpace [
+        base:description "Shared planning space for the illustrative CONCERTO, WISDOM, and NewFlAir capabilities."
+    ]
+
+    @rdfs:label "CONCERTO"
+    instance CONCERTO : icas-vv:VVPlatform [
+        base:description "V&V platform at component and subsystem levels with a strong physical and partly hybrid representation. ICAS examples: actuator behaviour, physical effects, and fault injection. The relative strength of representations is recorded only as text."
+        icas-vv:providesCapability CONCERTOComponentPhysical
+        icas-vv:providesCapability CONCERTOSubsystemHybrid
+    ]
+
+    @rdfs:label "WISDOM"
+    instance WISDOM : icas-vv:VVPlatform [
+        base:description "Hybrid V&V platform at subsystem level. ICAS examples: coupled interactions and aeroelastic effects in a hybrid aircraft context."
+        icas-vv:providesCapability WISDOMSubsystemHybrid
+    ]
+
+    @rdfs:label "NewFlAir"
+    instance NewFlAir : icas-vv:VVPlatform [
+        base:description "V&V platform at subsystem and system levels with an emphasis on hybrid to virtual representation. ICAS examples: system integration and fault scenarios in an integrated fly-by-wire architecture. The representation emphasis is recorded only as text."
+        icas-vv:providesCapability NewFlAirSubsystemHybrid
+        icas-vv:providesCapability NewFlAirSystemVirtual
+    ]
+
+    @rdfs:label "CONCERTO physical component investigation"
+    instance CONCERTOComponentPhysical : icas-vv:VVCapability [
+        base:description "Illustrative physical component investigation of actuator behaviour and physical effects."
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "Component"
+        icas-vv:hasSystemRepresentation "Physical"
+        icas-vv:hasVVFocus "FunctionalBehaviour"
+        icas-vv:hasVVFocus "PhysicalEffects"
+    ]
+
+    @rdfs:label "CONCERTO hybrid subsystem fault investigation"
+    instance CONCERTOSubsystemHybrid : icas-vv:VVCapability [
+        base:description "Illustrative hybrid subsystem investigation of functional behaviour under fault injection. Assigning this example to Subsystem/Hybrid is a demonstrator assumption."
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "Subsystem"
+        icas-vv:hasSystemRepresentation "Hybrid"
+        icas-vv:hasVVFocus "FunctionalBehaviour"
+        icas-vv:hasVVFocus "FaultScenarios"
+    ]
+
+    @rdfs:label "WISDOM hybrid subsystem interaction investigation"
+    instance WISDOMSubsystemHybrid : icas-vv:VVCapability [
+        base:description "Investigation of coupled interactions and aeroelastic effects in a hybrid aircraft context, covering subsystem functional behaviour, physical effects, and integration."
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "Subsystem"
+        icas-vv:hasSystemRepresentation "Hybrid"
+        icas-vv:hasVVFocus "FunctionalBehaviour"
+        icas-vv:hasVVFocus "PhysicalEffects"
+        icas-vv:hasVVFocus "SystemIntegration"
+    ]
+
+    @rdfs:label "NewFlAir hybrid subsystem integration investigation"
+    instance NewFlAirSubsystemHybrid : icas-vv:VVCapability [
+        base:description "Illustrative investigation of subsystem functional behaviour and integration in an integrated fly-by-wire architecture. Assigning this example to Subsystem/Hybrid is a demonstrator assumption."
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "Subsystem"
+        icas-vv:hasSystemRepresentation "Hybrid"
+        icas-vv:hasVVFocus "FunctionalBehaviour"
+        icas-vv:hasVVFocus "SystemIntegration"
+    ]
+
+    @rdfs:label "NewFlAir virtual system fault investigation"
+    instance NewFlAirSystemVirtual : icas-vv:VVCapability [
+        base:description "Illustrative investigation of system integration and functional behaviour under fault scenarios in an integrated fly-by-wire architecture. Assigning this example to System/Virtual is a demonstrator assumption."
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "System"
+        icas-vv:hasSystemRepresentation "Virtual"
+        icas-vv:hasVVFocus "FunctionalBehaviour"
+        icas-vv:hasVVFocus "SystemIntegration"
+        icas-vv:hasVVFocus "FaultScenarios"
+    ]
+
+    @rdfs:label "Test1", "Test11"
+    instance TestPlatform : icas-vv:VVPlatform [
+        base:description "Blabla"
+        icas-vv:providesCapability VVCapability1
+    ]
+
+    @rdfs:label "Capa1", "Capa1_Test"
+    instance VVCapability1 : icas-vv:VVCapability [
+        base:description "bliblablub"
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "Subsystem"
+        icas-vv:hasSystemRepresentation "Physical"
+        icas-vv:hasVVFocus "FunctionalBehaviour", "PhysicalEffects"
+    ]
+
+    @rdfs:label "ICAS Preview Physical"
+    instance ICASPreviewTestCapabilityPhysical : icas-vv:VVCapability [
+        base:description "UI test: physical component behaviour"
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "Component"
+        icas-vv:hasSystemRepresentation "Physical"
+        icas-vv:hasVVFocus "FunctionalBehaviour", "PhysicalEffects"
+    ]
+
+    @rdfs:label "ICAS Preview Virtual"
+    instance ICASPreviewTestCapabilityVirtual : icas-vv:VVCapability [
+        base:description "UI test: virtual system faults"
+        icas-vv:belongsToCapabilitySpace ICASCapabilitySpace
+        icas-vv:hasSystemLevel "System"
+        icas-vv:hasSystemRepresentation "Virtual"
+        icas-vv:hasVVFocus "SystemIntegration", "FaultScenarios"
+    ]
+
+    @rdfs:label "ICAS Preview Test Platform"
+    instance ICASPreviewTestPlatform : icas-vv:VVPlatform [
+        base:description "UI test platform with two capabilities"
+        icas-vv:providesCapability ICASPreviewTestCapabilityPhysical, ICASPreviewTestCapabilityVirtual
+    ]
+}

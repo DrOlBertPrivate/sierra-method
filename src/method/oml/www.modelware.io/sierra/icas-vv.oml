@@ -1,0 +1,73 @@
+@dc:title "ICAS V&V Capability Planning vocabulary"
+@dc:description "Defines V&V platforms and capabilities characterized by system level, system representation, and V&V focus."
+vocabulary <https://www.modelware.io/sierra/icas-vv#> as icas-vv {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+    extends <https://www.modelware.io/sierra/base#> as base
+
+    @dc:description "A technical implementation or test environment that provides one or more V&V capabilities."
+    concept VVPlatform < base:Element [
+        restricts providesCapability to min 1
+    ]
+
+    @dc:description "An ability to investigate a system using a V&V platform, characterized by SystemLevel x SystemRepresentation x VVFocus. A capability has one level, one representation, and one or more focuses; it is distinct from the technical platform."
+    concept VVCapability < base:Element [
+        restricts belongsToCapabilitySpace to exactly 1
+        restricts hasSystemLevel to exactly 1
+        restricts hasSystemRepresentation to exactly 1
+        restricts hasVVFocus to min 1
+    ]
+
+    @dc:description "A space grouping V&V capabilities characterized by system level, system representation, and V&V focus."
+    concept VVCapabilitySpace < base:Element
+
+    @dc:description "The system hierarchy level investigated by a V&V capability."
+    scalar SystemLevel [
+        oneOf "Component", "Subsystem", "System"
+    ] = xsd:string
+
+    @dc:description "The representation of the system investigated by a V&V capability."
+    scalar SystemRepresentation [
+        oneOf "Physical", "Hybrid", "Virtual"
+    ] = xsd:string
+
+    @dc:description "An investigation focus of a V&V capability."
+    scalar VVFocus [
+        oneOf "FunctionalBehaviour", "PhysicalEffects", "SystemIntegration", "FaultScenarios"
+    ] = xsd:string
+
+    @dc:description "Indicates that a technical V&V platform provides a V&V capability."
+    relation providesCapability [
+        from VVPlatform
+        to VVCapability
+        reverse isProvidedBy
+    ]
+
+    @dc:description "Assigns a V&V capability to exactly one capability space."
+    relation belongsToCapabilitySpace [
+        from VVCapability
+        to VVCapabilitySpace
+        reverse hasCapability
+        functional
+    ]
+
+    @dc:description "The single system level of a V&V capability."
+    scalar property hasSystemLevel [
+        domain VVCapability
+        range SystemLevel
+        functional
+    ]
+
+    @dc:description "The single system representation of a V&V capability."
+    scalar property hasSystemRepresentation [
+        domain VVCapability
+        range SystemRepresentation
+        functional
+    ]
+
+    @dc:description "One or more investigation focuses of a V&V capability."
+    scalar property hasVVFocus [
+        domain VVCapability
+        range VVFocus
+    ]
+}
